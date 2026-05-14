@@ -42,7 +42,9 @@ export default function RootLayout({
       )}
       suppressHydrationWarning>
       <body>
-        <NeonAuthUIProvider authClient={authClient as any}>
+        <NeonAuthUIProvider
+          authClient={authClient as any}
+          social={{ providers: ["google"] }}>
           <div className="min-h-screen flex flex-col">{children}</div>
         </NeonAuthUIProvider>
       </body>
