@@ -11,7 +11,7 @@ import { Button } from "@/components/ui/button";
 
 export default function Home() {
   return (
-    <div className="flex flex-1 flex-col justify-center items-center bg-linear-to-bl/oklch from-neutral-800 to-zinc-900">
+    <div className="flex flex-1 flex-col justify-center items-center bg-page">
       <section className="w-full max-w-3xl space-y-3">
         <Badge variant="outline" className="w-fit">
           NextJS • TypeScript • Tailwind CSS • PostgreSQL{" "}

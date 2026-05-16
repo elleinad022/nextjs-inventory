@@ -133,3 +133,9 @@
     @apply font-sans;
   }
 }
+
+@layer utilities {
+  .bg-page {
+    @apply bg-linear-to-bl/oklch from-neutral-800 to-zinc-900;
+  }
+}

@@ -20,7 +20,7 @@ export default async function AuthPage({
   const { data: session } = await auth.getSession();
 
   return (
-    <main className="flex flex-col min-h-screen items-center justify-center p-4 bg-linear-to-bl/oklch from-neutral-800 to-zinc-900">
+    <main className="flex flex-col min-h-screen items-center justify-center p-4 bg-page">
       <div className="mx-auto flex flex-col gap-2 min-w-sm max-w-md w-full items-center justify-center">
         {session ? (
           <div className="flex flex-col gap-4">
