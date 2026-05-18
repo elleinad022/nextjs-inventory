@@ -12,9 +12,20 @@ import {
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
 import { UserButton } from "@neondatabase/auth/react";
-import { BarChart3, Plus, User2 } from "lucide-react";
+import { BarChart3, Package, Plus, Settings, User2 } from "lucide-react";
+import Link from "next/link";
 
-export function AppSidebar() {
+export function AppSidebar({
+  currentPath = "/dashboard",
+}: {
+  currentPath: string;
+}) {
+  const navigation = [
+    { name: "Dashboard", href: "/dashboard", icon: BarChart3 },
+    { name: "Inventory", href: "/inventory", icon: Package },
+    { name: "Add Product", href: "/add-product", icon: Plus },
+    { name: "Settings", href: "/settings", icon: Settings },
+  ];
   return (
     <Sidebar>
       <SidebarHeader>
@@ -26,14 +37,21 @@ export function AppSidebar() {
         </div>
       </SidebarHeader>
       <SidebarContent>
-        <SidebarGroup>
-          <SidebarGroupLabel>Application</SidebarGroupLabel>
-          <SidebarGroupAction>
-            <Plus /> <span className="sr-only">Add Project</span>
-          </SidebarGroupAction>
-          <SidebarGroupContent></SidebarGroupContent>
-        </SidebarGroup>
-        <SidebarGroup />
+        {navigation.map((item, key) => {
+          const isActive = currentPath === item.href;
+          return (
+            <SidebarGroup key={key}>
+              <SidebarGroupLabel className="text-sm">
+                <Link
+                  className={`flex flex-row w-full gap-2 py-2 px-3 rounded-lg uppercase ${isActive ? "bg-sidebar-primary/20" : "hover:bg-sidebar-accent"} `}
+                  href={item.href}>
+                  {item.icon && <item.icon className="size-5" />}
+                  {item.name}
+                </Link>
+              </SidebarGroupLabel>
+            </SidebarGroup>
+          );
+        })}
       </SidebarContent>
       <SidebarFooter>
         <SidebarMenu>
