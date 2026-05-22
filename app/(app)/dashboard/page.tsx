@@ -63,7 +63,7 @@ export default async function DashboardPage() {
   });
 
   return (
-    <div className="min-h-screen bg-page">
+    <div className="min-h-screen w-full bg-page">
       <main className="p-8">
         {/* Header */}
         <div className="mb-8">
