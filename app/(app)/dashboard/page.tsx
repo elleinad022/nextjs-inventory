@@ -31,6 +31,23 @@ export default async function DashboardPage() {
     0,
   );
 
+  const inStockCount = allProducts.filter(
+    (product) => Number(product.quantity) > 5,
+  ).length;
+  const lowStockCount = allProducts.filter(
+    (product) => Number(product.quantity) <= 5 && Number(product.quantity) > 0,
+  ).length;
+  const outOfStockCount = allProducts.filter(
+    (products) => Number(products.quantity) === 0,
+  ).length;
+
+  const inStockPercentage =
+    totalProducts > 0 ? Math.round((inStockCount / totalProducts) * 100) : 0;
+  const lowStockPercentage =
+    totalProducts > 0 ? Math.round((lowStockCount / totalProducts) * 100) : 0;
+  const outOfStockPercentage =
+    totalProducts > 0 ? Math.round((outOfStockCount / totalProducts) * 100) : 0;
+
   const weeklyProductsData = [];
   const now = new Date();
 
@@ -184,6 +201,57 @@ export default async function DashboardPage() {
                   </div>
                 );
               })}
+            </div>
+          </div>
+
+          {/* Efficiency */}
+          <div className="bg-card rounded-lg border border-border p-6">
+            <div className="flex items-center justify-between mb-6">
+              <h2 className="text-lg font-semibold text-card-foreground">
+                Efficiency
+              </h2>
+            </div>
+            <div className="flex items-center justify-center">
+              <div className="relative size-48">
+                <div className="absolute inset-0 rounded-full border-8 border-border!"></div>
+                <div
+                  className="absolute inset-0 rounded-full border-8 border-primary! "
+                  style={{
+                    clipPath:
+                      "polygon(50% 50%, 50% 0, 100% 0, 100% 100%, 0% 100%, 0% 50%)",
+                  }}
+                />
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <div className="text-center">
+                    <div className="text-2xl font-bold text-card-foreground">
+                      {inStockPercentage}%
+                    </div>
+                    <div className="text-sm text-card-foreground/80">
+                      In Stock
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="mt-6 space-y-2">
+              <div className="flex items-center justify-between text-sm text-card-foreground">
+                <div className="flex items-center space-x-2">
+                  <div className="size-3 rounded-full bg-green-600" />
+                  <span>In stock ({inStockPercentage}%)</span>
+                </div>
+              </div>
+              <div className="flex items-center justify-between text-sm text-card-foreground">
+                <div className="flex items-center space-x-2">
+                  <div className="size-3 rounded-full bg-primary" />
+                  <span>Low stock ({lowStockPercentage}%)</span>
+                </div>
+              </div>
+              <div className="flex items-center justify-between text-sm text-card-foreground">
+                <div className="flex items-center space-x-2">
+                  <div className="size-3 rounded-full bg-secondary" />
+                  <span>Out of stock ({outOfStockPercentage}%)</span>
+                </div>
+              </div>
             </div>
           </div>
         </div>
