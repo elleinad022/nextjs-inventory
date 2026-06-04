@@ -5,7 +5,7 @@ import { TrendingUp } from "lucide-react";
 
 export default async function DashboardPage() {
   const user = await getUser();
-  const userId = user.id;
+  const userId = user?.id;
 
   const [totalProducts, lowStockProducts, allProducts] = await Promise.all([
     prisma.product.count({
@@ -99,12 +99,12 @@ export default async function DashboardPage() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8 ">
           {/* Key Metrics */}
           <div className="bg-card p-6 rounded-lg border border-border">
-            <h2 className="text-lg font-semibold text-card-foreground mb-6">
+            <h2 className="text-lg font-semibold text-card-foreground mb-10">
               Key Metrics
             </h2>
             <div className="grid grid-cols-3 gap-6">
               <div className="text-center">
-                <div className="text-xl font-bold text-card-foreground">
+                <div className="text-2xl font-bold text-card-foreground">
                   {totalProducts}
                 </div>
                 <div className="text-sm text-muted-foreground">
@@ -118,7 +118,7 @@ export default async function DashboardPage() {
                 </div>
               </div>
               <div className="text-center">
-                <div className="text-xl font-bold text-card-foreground">
+                <div className="text-2xl font-bold text-card-foreground">
                   ${Number(totalValue).toFixed(0)}
                 </div>
                 <div className="text-sm text-muted-foreground">Total Value</div>
@@ -130,7 +130,7 @@ export default async function DashboardPage() {
                 </div>
               </div>
               <div className="text-center">
-                <div className="text-xl font-bold text-card-foreground">
+                <div className="text-2xl font-bold text-card-foreground">
                   {lowStockProducts}
                 </div>
                 <div className="text-sm text-muted-foreground">Low Stock</div>

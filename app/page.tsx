@@ -1,15 +1,10 @@
 import Link from "next/link";
-import {
-  Card,
-  CardHeader,
-  CardDescription,
-  CardTitle,
-  CardContent,
-} from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
+import { getUser } from "@/lib/auth";
+import { PrimaryButton } from "@/components/landing-page-btn";
 
-export default function Home() {
+export default async function Home() {
+  const user = await getUser();
   return (
     <div className="flex flex-1 flex-col justify-center items-center bg-page">
       <section className="w-full max-w-3xl space-y-3">
@@ -25,11 +20,8 @@ export default function Home() {
           business operations.
         </p>
         <div className="flex flex-wrap gap-3">
-          <Link
-            href="/auth/sign-in"
-            className="bg-primary rounded-sm inline-flex items-center justify-center px-8 py-4 text-md font-medium text-primary-foreground hover:bg-primary/80">
-            Sign In
-          </Link>
+          <PrimaryButton />
+
           <Link
             href="/learn-more"
             className="bg-accent rounded-sm inline-flex items-center justify-center px-8 py-4 text-md font-medium text-accent-foreground hover:bg-accent/80">
