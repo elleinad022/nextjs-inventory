@@ -108,12 +108,13 @@ export default async function AddProductPage() {
                   <Button type="submit" size="lg" variant="default">
                     Add Product
                   </Button>
-                  <Button
-                    size="lg"
-                    variant="outline"
-                    render={<Link href="/inventory" />}>
-                    Cancel
-                  </Button>
+                  <div className="flex items-center bg-secondary border border-border rounded-lg hover:bg-secondary/80">
+                    <Link
+                      href="/inventory"
+                      className="text-sm font-normal text-foreground px-3">
+                      Cancel
+                    </Link>
+                  </div>
                 </div>
               </Field>
             </form>
