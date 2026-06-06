@@ -11,10 +11,13 @@ export default async function InventoryPage({
   searchParams: Promise<{ q?: string; page?: string }>;
 }) {
   const user = await getUser();
-  const userId = user.id;
+  const userId = user?.id;
 
   const params = await searchParams;
   const q = (params.q ?? "").trim();
+
+  const pageSize = 5;
+  const page = Math.max(1, Number(params.page ?? 1));
 
   const where = {
     userId,
@@ -25,13 +28,13 @@ export default async function InventoryPage({
     prisma.product.count({ where }),
     prisma.product.findMany({
       where,
+      orderBy: { createdAt: "desc" },
+      skip: (page - 1) * pageSize,
+      take: pageSize,
     }),
   ]);
 
-  const pageSize = 10;
   const totalPages = Math.max(1, Math.ceil(totalCount / pageSize));
-
-  const page = Math.max(1, Number(params.page ?? 1));
 
   return (
     <div className="min-h-screen bg-page">
@@ -125,7 +128,7 @@ export default async function InventoryPage({
             <div className="bg-popover rounded-lg border border-border p-6">
               <AppPagination
                 currentPage={page}
-                totalPages={19}
+                totalPages={totalPages}
                 baseUrl="/inventory"
                 searchParams={{
                   q,

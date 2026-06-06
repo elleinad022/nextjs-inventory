@@ -23,6 +23,11 @@ export default function AppPagination({
 }: PaginationProps) {
   if (totalPages <= 1) return null;
 
+  const getPageUrl = (page: number) => {
+    const params = new URLSearchParams({ ...searchParams, page: String(page) });
+    return `${baseUrl}?${params.toString()}`;
+  };
+
   const getVisiblePages = () => {
     const delta = 2;
     const range = [];
@@ -60,26 +65,35 @@ export default function AppPagination({
       <PaginationContent>
         <PaginationItem>
           <PaginationPrevious
-            href="#"
+            href={getPageUrl(currentPage - 1)}
             className={`${currentPage <= 1 ? "invisible" : ""}`}
           />
         </PaginationItem>
         {visiblePages.map((page, key) => {
+          if (page === "...") {
+            return (
+              <PaginationItem key={key}>
+                <PaginationEllipsis />
+              </PaginationItem>
+            );
+          }
+
           const pageNumber = page as number;
           const isCurrent = pageNumber === currentPage;
 
           return (
-            <PaginationLink key={key} href={"/"}>
-              {pageNumber}
-            </PaginationLink>
+            <PaginationItem key={key}>
+              <PaginationLink
+                href={getPageUrl(pageNumber)}
+                isActive={isCurrent}>
+                {pageNumber}
+              </PaginationLink>
+            </PaginationItem>
           );
         })}
         <PaginationItem>
-          <PaginationEllipsis />
-        </PaginationItem>
-        <PaginationItem>
           <PaginationNext
-            href="#"
+            href={getPageUrl(currentPage + 1)}
             className={`${currentPage >= totalPages ? "invisible" : ""}`}
           />
         </PaginationItem>

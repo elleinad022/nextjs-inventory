@@ -24,7 +24,7 @@ export function AppSidebar({
     { name: "Dashboard", href: "/dashboard", icon: BarChart3 },
     { name: "Inventory", href: "/inventory", icon: Package },
     { name: "Add Product", href: "/add-product", icon: Plus },
-    { name: "Settings", href: "/settings", icon: Settings },
+    { name: "Settings", href: "/account/settings", icon: Settings },
   ];
   return (
     <Sidebar>
