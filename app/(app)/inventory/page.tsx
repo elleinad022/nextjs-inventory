@@ -60,69 +60,74 @@ export default async function InventoryPage({
                 type="text"
                 name="q"
                 placeholder="Search Products..."
-                className="flex-1 px-4 py-2 border border-border rounded-lg"
+                className="w-full md:flex-1 px-4 py-2 border border-border rounded-lg"
               />
-              <Button type="submit" variant="default" className="h-11">
-                <Search /> Search
+              <Button
+                type="submit"
+                variant="default"
+                className="h-11 px-4 md:px-2">
+                <Search /> <span className="md:block hidden">Search</span>
               </Button>
             </form>
           </div>
 
           {/* Products Table */}
           <div className="bg-card rounded-lg border border-border overflow-hidden">
-            <table className="w-full">
-              <thead className="bg-popover">
-                <tr>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-popover-foreground/80 uppercase">
-                    Name
-                  </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-popover-foreground/80 uppercase">
-                    SKU
-                  </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-popover-foreground/80 uppercase">
-                    Price
-                  </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-popover-foreground/80 uppercase">
-                    Quantity
-                  </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-popover-foreground/80 uppercase">
-                    Low Stock At
-                  </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-popover-foreground/80 uppercase">
-                    Actions
-                  </th>
-                </tr>
-              </thead>
-
-              <tbody className="bg-popover/60 divide-y divide-popover-foreground/70">
-                {items.map((product, key) => (
-                  <tr key={key} className="hover:bg-popover-foreground/20">
-                    <td className="px-6 py-4 text-sm text-popover-foreground/70 ">
-                      {product.name}
-                    </td>
-                    <td className="px-6 py-4 text-sm text-popover-foreground/70 ">
-                      {product.sku || "--"}
-                    </td>
-                    <td className="px-6 py-4 text-sm text-popover-foreground ">
-                      ${Number(product.price).toFixed(2)}
-                    </td>
-                    <td className="px-6 py-4 text-sm text-popover-foreground ">
-                      {product.quantity}
-                    </td>
-                    <td className="px-6 py-4 text-sm text-popover-foreground/70 ">
-                      {product.lowStockAt || "--"}
-                    </td>
-                    <td className="px-6 py-4 text-sm text-popover-foreground/70 ">
-                      <form action={deleteProduct.bind(null, product.id)}>
-                        <Button variant="destructive" type="submit">
-                          Delete
-                        </Button>
-                      </form>
-                    </td>
+            <div className="overflow-x-auto">
+              <table className="w-full">
+                <thead className="bg-popover">
+                  <tr>
+                    <th className="px-6 py-3 text-left text-xs font-medium text-popover-foreground/80 uppercase">
+                      Name
+                    </th>
+                    <th className="px-6 py-3 text-left text-xs font-medium text-popover-foreground/80 uppercase">
+                      SKU
+                    </th>
+                    <th className="px-6 py-3 text-left text-xs font-medium text-popover-foreground/80 uppercase">
+                      Price
+                    </th>
+                    <th className="px-6 py-3 text-left text-xs font-medium text-popover-foreground/80 uppercase">
+                      Quantity
+                    </th>
+                    <th className="px-6 py-3 text-left text-xs font-medium text-popover-foreground/80 uppercase">
+                      Low Stock At
+                    </th>
+                    <th className="px-6 py-3 text-left text-xs font-medium text-popover-foreground/80 uppercase">
+                      Actions
+                    </th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
+                </thead>
+
+                <tbody className="bg-popover/60 divide-y divide-popover-foreground/70">
+                  {items.map((product, key) => (
+                    <tr key={key} className="hover:bg-popover-foreground/20">
+                      <td className="px-6 py-4 text-sm text-popover-foreground/70 ">
+                        {product.name}
+                      </td>
+                      <td className="px-6 py-4 text-sm text-popover-foreground/70 ">
+                        {product.sku || "--"}
+                      </td>
+                      <td className="px-6 py-4 text-sm text-popover-foreground ">
+                        ${Number(product.price).toFixed(2)}
+                      </td>
+                      <td className="px-6 py-4 text-sm text-popover-foreground ">
+                        {product.quantity}
+                      </td>
+                      <td className="px-6 py-4 text-sm text-popover-foreground/70 ">
+                        {product.lowStockAt || "--"}
+                      </td>
+                      <td className="px-6 py-4 text-sm text-popover-foreground/70 ">
+                        <form action={deleteProduct.bind(null, product.id)}>
+                          <Button variant="destructive" type="submit">
+                            Delete
+                          </Button>
+                        </form>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
           </div>
           {totalPages > 1 && (
             <div className="bg-popover rounded-lg border border-border p-6">
