@@ -23,9 +23,9 @@ export default async function Home() {
           <PrimaryButton />
 
           <Link
-            href="/learn-more"
+            href="/auth/sign-up"
             className="bg-accent rounded-sm inline-flex items-center justify-center px-8 py-4 text-md font-medium text-accent-foreground hover:bg-accent/80">
-            Learn More
+            Create an account
           </Link>
         </div>
       </section>
