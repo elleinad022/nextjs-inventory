@@ -108,7 +108,7 @@ export default async function InventoryPage({
                         {product.sku || "--"}
                       </td>
                       <td className="px-6 py-4 text-sm text-popover-foreground ">
-                        ${Number(product.price).toFixed(2)}
+                        ₱{Number(product.price).toFixed(2)}
                       </td>
                       <td className="px-6 py-4 text-sm text-popover-foreground ">
                         {product.quantity}
@@ -116,12 +116,16 @@ export default async function InventoryPage({
                       <td className="px-6 py-4 text-sm text-popover-foreground/70 ">
                         {product.lowStockAt || "--"}
                       </td>
-                      <td className="px-6 py-4 text-sm text-popover-foreground/70 ">
+                      <td className="px-6 py-4 text-sm text-popover-foreground/70 flex flex-row gap-2">
                         <form action={deleteProduct.bind(null, product.id)}>
                           <Button variant="destructive" type="submit">
                             Delete
                           </Button>
                         </form>
+
+                        <Button variant="outline" type="button">
+                          Edit
+                        </Button>
                       </td>
                     </tr>
                   ))}

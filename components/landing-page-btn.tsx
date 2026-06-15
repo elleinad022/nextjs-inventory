@@ -4,9 +4,16 @@ import { authClient } from "@/lib/auth/client";
 import Link from "next/link";
 
 export function PrimaryButton() {
-  const { data: session } = authClient.useSession();
+  const { data: session, isPending } = authClient.useSession();
   const user = session?.user;
 
+  if (isPending) {
+    return (
+      <div className="bg-primary/50 animate-pulse rounded-sm inline-flex items-center justify-center px-8 py-4 text-md font-medium text-primary-foreground min-w-40">
+        Loading...
+      </div>
+    );
+  }
   return user ? (
     <Link
       href="/dashboard"

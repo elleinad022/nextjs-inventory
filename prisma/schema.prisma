@@ -23,6 +23,31 @@ model Product {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
+  movement StockMovement[]
+
   @@index([userId, name])
   @@index([createdAt])
+}
+
+model StockMovement {
+  id String @id @default(cuid())
+  productId String
+  userId String 
+  type MovementType
+  quantity Int
+  reason String?
+
+  createdAt DateTime @default(now())
+
+  product Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+
+  @@index([productId])
+  @@index([createdAt])
+}
+
+enum MovementType {
+  RESTOCK
+  ADJUSTMENT
+  SALE
+  REMOVAL
 }

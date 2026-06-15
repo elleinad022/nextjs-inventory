@@ -1,10 +1,8 @@
 import Link from "next/link";
 import { Badge } from "@/components/ui/badge";
-import { getUser } from "@/lib/auth";
 import { PrimaryButton } from "@/components/landing-page-btn";
 
 export default async function Home() {
-  const user = await getUser();
   return (
     <div className="flex flex-1 flex-col justify-center items-center bg-page">
       <section className="w-full max-w-3xl space-y-3">

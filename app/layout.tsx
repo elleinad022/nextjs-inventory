@@ -5,6 +5,7 @@ import { cn } from "@/lib/utils";
 
 import { NeonAuthUIProvider } from "@neondatabase/auth/react";
 import { authClient } from "@/lib/auth/client";
+import { AuthRefreshSync } from "@/components/auth-refresh-sync";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
 
@@ -45,6 +46,7 @@ export default function RootLayout({
         <NeonAuthUIProvider
           authClient={authClient as any}
           social={{ providers: ["google"] }}>
+          <AuthRefreshSync />
           <div className="min-h-screen flex flex-col">{children}</div>
         </NeonAuthUIProvider>
       </body>

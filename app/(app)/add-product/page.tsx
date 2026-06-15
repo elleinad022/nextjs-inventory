@@ -1,8 +1,9 @@
-import { Button } from "@/components/ui/button";
+import { Button, buttonVariants } from "@/components/ui/button";
 import { Field, FieldDescription, FieldLabel } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
 import { createProduct } from "@/lib/actions/products";
 import { getUser } from "@/lib/auth";
+import { cn } from "@/lib/utils";
 import Link from "next/link";
 
 export default async function AddProductPage() {
@@ -108,13 +109,15 @@ export default async function AddProductPage() {
                   <Button type="submit" size="lg" variant="default">
                     Add Product
                   </Button>
-                  <div className="flex items-center bg-secondary border border-border rounded-lg hover:bg-secondary/80">
-                    <Link
-                      href="/inventory"
-                      className="text-sm font-normal text-foreground px-3">
-                      Cancel
-                    </Link>
-                  </div>
+
+                  <Link
+                    href="/inventory"
+                    className={cn(
+                      buttonVariants({ variant: "outline", size: "lg" }),
+                      "px-6",
+                    )}>
+                    Cancel
+                  </Link>
                 </div>
               </Field>
             </form>
