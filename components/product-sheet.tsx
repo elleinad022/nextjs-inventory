@@ -1,7 +1,6 @@
 "use client";
 
 import { updateProduct } from "@/lib/actions/products";
-import { Product } from "@/lib/generated/prisma/client";
 import { useTransition } from "react";
 import {
   Sheet,
@@ -15,9 +14,10 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "./ui/tabs";
 import { Label } from "./ui/label";
 import { Input } from "./ui/input";
 import { Button } from "./ui/button";
+import { SerializedProduct } from "@/lib/types";
 
 interface ProductSheetProps {
-  product: Product | null;
+  product: SerializedProduct | null;
   open: boolean;
   onOpenChange: (open: boolean) => void;
 }
@@ -79,7 +79,7 @@ export default function ProductSheet({
                   name="price"
                   step="0.01"
                   type="number"
-                  defaultValue={Number(product.price)}
+                  defaultValue={product.price}
                 />
               </div>
               <div className="flex flex-col gap-1">
